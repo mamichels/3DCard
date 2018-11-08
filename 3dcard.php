@@ -71,7 +71,7 @@
         }
 
         .container {
-            width: 100%;
+            width: 720px;
             padding-right: 15px;
             padding-left: 15px;
             margin-right: auto;
@@ -92,6 +92,8 @@
             background-color: #f3f4f1;
             transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+
+            height: 500px;
         }
 
         .multidimensional-card-body{
@@ -174,19 +176,43 @@
         var rotateY = 1;
         var rotateX = 0;
 
-        if(mousePosY > 50 && mousePosX > 360){
-            for (let i = 0; i < 5; i++) {
-                rotateX++;
-                rotateY++;
-                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-            }
-        }
-
-        if(mousePosY < 50 && mousePosX < 360){
-            for (let i = 0; i < 5; i++) {
+        if(mousePosY < 300 && mousePosX < 320){
+            for (let i = 0; i < 10; i++) {
                 rotateX--;
                 rotateY--;
                 obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+                console.log(rotateX);
+
+            }
+        }
+
+        if(mousePosY > 300 && mousePosX > 320){
+            for (let i = 0; i < 10; i++) {
+                rotateX++;
+                rotateY++;
+                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+                console.log(rotateX);
+
+            }
+        }
+
+        if(mousePosY < 300 && mousePosX > 320){
+            for (let i = 0; i < 10; i++) {
+                rotateX++;
+                rotateY--;
+                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+                console.log(rotateX);
+
+            }
+        }
+
+        if(mousePosY > 300 && mousePosX < 320){
+            for (let i = 0; i < 10; i++) {
+                rotateX--; //(mousePosX/2 - mousePosX) /100)
+                rotateY++;
+                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+                console.log(rotateX);
+
             }
         }
     }
