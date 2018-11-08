@@ -112,7 +112,6 @@
         .filler{
             height: 50px;
         }
-
     </style>
 </head>
 <body>
@@ -120,39 +119,90 @@
 <div class="filler"></div>
 
 <div class="container">
-    <div class="multidimensional-card shadow" onmouseover="mOverCard(this)" onmouseout="mOut(this)">
-        <div class="multidimensional-card-body shadow" onmouseover="mOverCardBody(this)" onmouseout="mOut(this)">
+    <div class="multidimensional-card shadow" onmouseover="mOverCard(this)" onmouseout="mOut(this)" id="multidimensional-card" >
+        <div class="multidimensional-card-body shadow" onmouseout="mOut(this)">
 
         </div>
     </div>
 </div>
 
+<div id="dbg"></div>
+
+
+
+
 <script>
-     var rotateY = 1;
-     var rotateX = 0;
-     var rotateZ = 0;
+     var mousePosX;
+     var mousePosY;
+     var elem = document.getElementById('multidimensional-card');
 
-    function mOverCard(obj) {
-        rotateY =+ 3;
-        rotateX =+ 3;
-        rotateZ =+ 3;
-        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(" + rotateZ + "deg) scale(1)";
-    }
+     elem.addEventListener('mousemove', onMousemove, false);
 
-     function mOverCardBody(obj) {
-        rotateY =+ 0.05;
-        rotateX =+ 0.05;
-        rotateZ =+ 0.05;
-        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(" + rotateZ + "deg) scale(1)";
+     var dbg = document.getElementById('dbg');
+
+     function onMousemove(e){
+         var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0,
+             obj = this;
+         //get mouse position on document crossbrowser
+         if (!e){e = window.event;}
+         if (e.pageX || e.pageY){
+             m_posx = e.pageX;
+             m_posy = e.pageY;
+         } else if (e.clientX || e.clientY){
+             m_posx = e.clientX + document.body.scrollLeft
+                 + document.documentElement.scrollLeft;
+             m_posy = e.clientY + document.body.scrollTop
+                 + document.documentElement.scrollTop;
+         }
+         //get parent element position in document
+         if (obj.offsetParent){
+             do{
+                 e_posx += obj.offsetLeft;
+                 e_posy += obj.offsetTop;
+             } while (obj = obj.offsetParent);
+         }
+
+         mousePosX = m_posx-e_posx;
+         mousePosY = m_posy-e_posy;
+
+         // mouse position minus elm position is mouseposition relative to element:
+         dbg.innerHTML = ' X Position: ' + mousePosX
+             + ' Y Position: ' + mousePosY;
      }
 
-     function mOut(obj) {
-        obj.style.transform = "rotateY(1deg)";
-        obj.style.transform = "rotateX(0deg)";
-        obj.style.transform = "rotateZ(0deg)";
-        obj.style.transform = "scale(1)";
-    }
-</script>
+    function mOverCard(obj) {
+        var rotateY = 1;
+        var rotateX = 0;
 
+        if(mousePosY > 50 && mousePosX > 360){
+            for (let i = 0; i < 5; i++) {
+                rotateX++;
+                rotateY++;
+                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+            }
+        }
+
+        if(mousePosY < 50 && mousePosX < 360){
+            for (let i = 0; i < 5; i++) {
+                rotateX--;
+                rotateY--;
+                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+            }
+        }
+    }
+
+/*     function mOverCardBody(obj) {
+        translateY =+ 0.05;
+        translateX =+ 0.05;
+        obj.style.transform = "TranslateX(" + translateX + "deg) TranslateY(" + translateY + "deg)";
+     }*/
+
+     function mOut(obj) {
+         obj.style.transform = "rotateY(1deg)";
+         obj.style.transform = "rotateX(0deg)";
+         obj.style.transform = "rotateZ(0deg)";
+         obj.style.transform = "scale(1)";
+     }
+</script>
 </body>
 </html>
