@@ -70,10 +70,6 @@
             box-sizing: border-box;
         }
 
-        .shadow {
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-        }
-
         .container {
             width: 100%;
             padding-right: 15px;
@@ -95,6 +91,7 @@
             border-radius: .25rem;
             background-color: #f3f4f1;
             transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
         }
 
         .multidimensional-card-body{
@@ -109,23 +106,52 @@
             border-radius: .25rem;
             background-color: white;
             transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        }
+
+        .filler{
+            height: 50px;
         }
 
     </style>
 </head>
 <body>
 
+<div class="filler"></div>
 
 <div class="container">
-    <div class="multidimensional-card shadow">
-        <div class="multidimensional-card-body shadow">
+    <div class="multidimensional-card shadow" onmouseover="mOverCard(this)" onmouseout="mOut(this)">
+        <div class="multidimensional-card-body shadow" onmouseover="mOverCardBody(this)" onmouseout="mOut(this)">
 
         </div>
     </div>
 </div>
 
 <script>
+     var rotateY = 1;
+     var rotateX = 0;
+     var rotateZ = 0;
 
+    function mOverCard(obj) {
+        rotateY =+ 3;
+        rotateX =+ 3;
+        rotateZ =+ 3;
+        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(" + rotateZ + "deg) scale(1)";
+    }
+
+     function mOverCardBody(obj) {
+        rotateY =+ 0.05;
+        rotateX =+ 0.05;
+        rotateZ =+ 0.05;
+        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(" + rotateZ + "deg) scale(1)";
+     }
+
+     function mOut(obj) {
+        obj.style.transform = "rotateY(1deg)";
+        obj.style.transform = "rotateX(0deg)";
+        obj.style.transform = "rotateZ(0deg)";
+        obj.style.transform = "scale(1)";
+    }
 </script>
 
 </body>
