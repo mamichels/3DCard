@@ -121,26 +121,21 @@
 <div class="filler"></div>
 
 <div class="container">
-    <div class="multidimensional-card shadow" onmouseover="mOverCard(this)" onmouseout="mOut(this)" id="multidimensional-card" >
-        <div class="multidimensional-card-body shadow" onmouseout="mOut(this)">
+    <div class="multidimensional-card shadow" id="multidimensional-card" >
+        <div class="multidimensional-card-body shadow" id="multidimensional-card-body" >
 
         </div>
     </div>
 </div>
 
-<div id="dbg"></div>
-
-
-
-
 <script>
      var mousePosX;
      var mousePosY;
      var elem = document.getElementById('multidimensional-card');
+     var elembody = document.getElementById('multidimensional-card-body');
 
      elem.addEventListener('mousemove', onMousemove, false);
-
-     var dbg = document.getElementById('dbg');
+     elem.addEventListener('mouseout', mOut(elem), false);
 
      function onMousemove(e){
          var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0,
@@ -167,67 +162,52 @@
          mousePosX = m_posx-e_posx;
          mousePosY = m_posy-e_posy;
 
-         // mouse position minus elm position is mouseposition relative to element:
-         dbg.innerHTML = ' X Position: ' + mousePosX
-             + ' Y Position: ' + mousePosY;
+         elem.addEventListener('mouseover', mOverCard(elem), false);
      }
 
     function mOverCard(obj) {
-        var rotateY = 1;
         var rotateX = 0;
+        var rotateY = 0;
 
-        if(mousePosY < 300 && mousePosX < 320){
-            for (let i = 0; i < 10; i++) {
-                rotateX--;
-                rotateY--;
-                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-                console.log(rotateX);
-
-            }
+        if(mousePosY < 360 && mousePosX < 360)
+        {
+            rotateY = rotateX = (-mousePosX - mousePosY) * 0.025;
+        } else if(mousePosY > 360 && mousePosX > 360) {
+            rotateY = rotateX = (mousePosX + mousePosY) * 0.025;
+        } else if(mousePosY < 360 && mousePosX > 360){
+            rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
+        } else{
+            rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
         }
 
-        if(mousePosY > 300 && mousePosX > 320){
-            for (let i = 0; i < 10; i++) {
-                rotateX++;
-                rotateY++;
-                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-                console.log(rotateX);
+        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
 
-            }
-        }
-
-        if(mousePosY < 300 && mousePosX > 320){
-            for (let i = 0; i < 10; i++) {
-                rotateX++;
-                rotateY--;
-                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-                console.log(rotateX);
-
-            }
-        }
-
-        if(mousePosY > 300 && mousePosX < 320){
-            for (let i = 0; i < 10; i++) {
-                rotateX--; //(mousePosX/2 - mousePosX) /100)
-                rotateY++;
-                obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-                console.log(rotateX);
-
-            }
-        }
+        elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
     }
 
-/*     function mOverCardBody(obj) {
-        translateY =+ 0.05;
-        translateX =+ 0.05;
-        obj.style.transform = "TranslateX(" + translateX + "deg) TranslateY(" + translateY + "deg)";
-     }*/
+     function mOut(elem) {
+         elem.style.transform = "rotateY(1deg)";
+         elem.style.transform = "rotateX(0deg)";
+         elem.style.transform = "rotateZ(0deg)";
+         elem.style.transform = "scale(1)";
+     }
 
-     function mOut(obj) {
-         obj.style.transform = "rotateY(1deg)";
-         obj.style.transform = "rotateX(0deg)";
-         obj.style.transform = "rotateZ(0deg)";
-         obj.style.transform = "scale(1)";
+    function mOverCardBody(obj) {
+        var translateX;
+        var translateY;
+
+         if(mousePosY < 360 && mousePosX < 360)
+        {
+            translateY = translateX = (- mousePosX - mousePosY) * 0.01;
+        } else if(mousePosY > 360 && mousePosX > 360) {
+             translateY = translateX = (mousePosX + mousePosY) * 0.01;
+        } else if(mousePosY < 360 && mousePosX > 360){
+             translateY = translateX = (- mousePosX + mousePosY) * 0.01;
+        } else{
+             translateY = translateX = (- mousePosX + mousePosY) * 0.01;
+        }
+
+        obj.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
      }
 </script>
 </body>
