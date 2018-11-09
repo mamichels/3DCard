@@ -131,6 +131,8 @@
 <script>
      var mousePosX;
      var mousePosY;
+     var originX;
+     var originY;
      var elem = document.getElementById('multidimensional-card');
      var elembody = document.getElementById('multidimensional-card-body');
 
