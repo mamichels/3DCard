@@ -131,17 +131,16 @@
 <script>
      var mousePosX;
      var mousePosY;
-     var originX;
-     var originY;
      var elem = document.getElementById('multidimensional-card');
      var elembody = document.getElementById('multidimensional-card-body');
+     var originX = elem.offsetWidth;
+     var originY = elem.offsetHeight;
 
      elem.addEventListener('mousemove', onMousemove, false);
      elem.addEventListener('mouseout', mOut(elem), false);
 
      function onMousemove(e){
-         var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0,
-             obj = this;
+         var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0, obj = this;
          //get mouse position on document crossbrowser
          if (!e){e = window.event;}
          if (e.pageX || e.pageY){
@@ -163,23 +162,23 @@
 
          mousePosX = m_posx-e_posx;
          mousePosY = m_posy-e_posy;
+         var rotateX = -(((originX / 2) - mousePosX) * 0.025);
+         var rotateY = ((originY / 2) - mousePosY) * 0.025;
 
-         var rotateX = 0;
-         var rotateY = 0;
-
-         if(mousePosY < 360 && mousePosX < 360){
-             rotateY = rotateX = (-mousePosX - mousePosY) * 0.025;
-         } else if(mousePosY > 360 && mousePosX > 360){
-             rotateY = rotateX = (mousePosX + mousePosY) * 0.025;
-         } else if(mousePosY < 360 && mousePosX > 360){
-             rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
-         } else{
-             rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
+         if(rotateY < 0) {
+             rotateY = -1 * rotateY;
          }
 
-         obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+         elem.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
 
          elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
+     }
+
+    function mOverCardBody(obj) {
+        var translateX = -(((originX / 2) - mousePosX) * 0.005);
+        var translateY = -((originY / 2) - mousePosY) * 0.005;
+
+        obj.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
      }
 
      function mOut(elem) {
@@ -187,24 +186,6 @@
          elem.style.transform = "rotateX(0deg)";
          elem.style.transform = "rotateZ(0deg)";
          elem.style.transform = "scale(1)";
-     }
-
-    function mOverCardBody(obj) {
-        var translateX;
-        var translateY;
-
-         if(mousePosY < 360 && mousePosX < 360)
-        {
-            translateY = translateX = (- mousePosX - mousePosY) * 0.01;
-        } else if(mousePosY > 360 && mousePosX > 360) {
-             translateY = translateX = (mousePosX + mousePosY) * 0.01;
-        } else if(mousePosY < 360 && mousePosX > 360){
-             translateY = translateX = (- mousePosX + mousePosY) * 0.01;
-        } else{
-             translateY = translateX = (- mousePosX + mousePosY) * 0.01;
-        }
-
-        obj.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
      }
 </script>
 </body>
