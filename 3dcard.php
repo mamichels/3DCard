@@ -164,28 +164,23 @@
          mousePosX = m_posx-e_posx;
          mousePosY = m_posy-e_posy;
 
-         elem.addEventListener('mouseover', mOverCard(elem), false);
+         var rotateX = 0;
+         var rotateY = 0;
+
+         if(mousePosY < 360 && mousePosX < 360){
+             rotateY = rotateX = (-mousePosX - mousePosY) * 0.025;
+         } else if(mousePosY > 360 && mousePosX > 360){
+             rotateY = rotateX = (mousePosX + mousePosY) * 0.025;
+         } else if(mousePosY < 360 && mousePosX > 360){
+             rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
+         } else{
+             rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
+         }
+
+         obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+
+         elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
      }
-
-    function mOverCard(obj) {
-        var rotateX = 0;
-        var rotateY = 0;
-
-        if(mousePosY < 360 && mousePosX < 360)
-        {
-            rotateY = rotateX = (-mousePosX - mousePosY) * 0.025;
-        } else if(mousePosY > 360 && mousePosX > 360) {
-            rotateY = rotateX = (mousePosX + mousePosY) * 0.025;
-        } else if(mousePosY < 360 && mousePosX > 360){
-            rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
-        } else{
-            rotateY = rotateX = (-mousePosX + mousePosY) * 0.025;
-        }
-
-        obj.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
-
-        elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
-    }
 
      function mOut(elem) {
          elem.style.transform = "rotateY(1deg)";
