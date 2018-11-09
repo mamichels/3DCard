@@ -6,7 +6,7 @@ var originX = elem.offsetWidth;
 var originY = elem.offsetHeight;
 
 elem.addEventListener('mousemove', onMousemove, false);
-elem.addEventListener('mouseout', mOut(elem), false);
+elem.addEventListener('mouseout', mOut, false);
 
 function onMousemove(e){
     var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0, obj = this;
@@ -31,8 +31,8 @@ function onMousemove(e){
 
     mousePosX = m_posx-e_posx;
     mousePosY = m_posy-e_posy;
-    var rotateX = -(((originX / 2) - mousePosX) * 0.025);
-    var rotateY = ((originY / 2) - mousePosY) * 0.025;
+    var rotateX = -(((originX / 2) - mousePosX) * 0.035);
+    var rotateY = ((originY / 2) - mousePosY) * 0.035;
 
     if(rotateY < 0) {
         rotateY = -1 * rotateY;
@@ -40,19 +40,18 @@ function onMousemove(e){
 
     elem.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
 
-    elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
+    if(elembody){
+        elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
+    }
 }
 
 function mOverCardBody(obj) {
-    var translateX = -(((originX / 2) - mousePosX) * 0.005);
-    var translateY = -((originY / 2) - mousePosY) * 0.005;
-
+    var translateX = -(((originX / 2) - mousePosX) * 0.01);
+    var translateY = -((originY / 2) - mousePosY) * 0.01;
     obj.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
 }
 
-function mOut(elem) {
-    elem.style.transform = "rotateY(1deg)";
-    elem.style.transform = "rotateX(0deg)";
-    elem.style.transform = "rotateZ(0deg)";
-    elem.style.transform = "scale(1)";
+function mOut() {
+    elembody.style.transform = "TranslateX(0px) TranslateY(0px)";
+    elem.style.transform = "rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1)";
 }
