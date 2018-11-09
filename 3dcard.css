@@ -1,0 +1,32 @@
+.multidimensional-card{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    background-color: #f3f4f1;
+    transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+
+    height: 500px;
+}
+
+.multidimensional-card-body{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    margin: 10% 20% 0 0;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    background-color: white;
+    transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
