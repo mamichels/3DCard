@@ -1,12 +1,27 @@
+/**
+ * Created by PhpStorm.
+ * User: Philipnormal
+ * Date: 08.11.18
+ * Time: 17:14
+ * License: MIT
+ */
+
+
 var mousePosX;
 var mousePosY;
 var elem = document.getElementById('multidimensional-card');
 var elembody = document.getElementById('multidimensional-card-body');
 var originX = elem.offsetWidth;
 var originY = elem.offsetHeight;
+var rotateX;
+var rotateY;
+var translateX;
+var translateY;
 
+//elem.addEventListener('mouseenter', mIn, false);
 elem.addEventListener('mousemove', onMousemove, false);
 elem.addEventListener('mouseout', mOut, false);
+
 
 function onMousemove(e){
     var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0, obj = this;
@@ -31,27 +46,33 @@ function onMousemove(e){
 
     mousePosX = m_posx-e_posx;
     mousePosY = m_posy-e_posy;
-    var rotateX = -(((originX / 2) - mousePosX) * 0.035);
-    var rotateY = ((originY / 2) - mousePosY) * 0.035;
+    rotateX = -(((originX / 2) - mousePosX) * 0.035);
+    rotateY = ((originY / 2) - mousePosY) * 0.035;
 
     if(rotateY < 0) {
         rotateY = -1 * rotateY;
     }
 
-    elem.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1)";
+    elem.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1.03)";
 
     if(elembody){
-        elembody.addEventListener('mouseover', mOverCardBody(elembody), false);
+        translateX = -(((originX / 2) - mousePosX) * 0.01);
+        translateY = -((originY / 2) - mousePosY) * 0.01;
+        elembody.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
     }
 }
 
-function mOverCardBody(obj) {
-    var translateX = -(((originX / 2) - mousePosX) * 0.01);
-    var translateY = -((originY / 2) - mousePosY) * 0.01;
-    obj.style.transform = "TranslateX(" + translateX + "px) TranslateY(" + translateY + "px)";
+/*
+function mIn() {
+    elem.style.animation = "shiftCard 0.25s";
+    elembody.style.animation = "shiftCardBody 0.25s";
 }
+*/
 
 function mOut() {
-    elembody.style.transform = "TranslateX(0px) TranslateY(0px)";
+    if(elembody) {
+        elembody.style.transform = "none";
+    }
     elem.style.transform = "rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1)";
+    elem.style.animation = "";
 }

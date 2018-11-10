@@ -1,3 +1,11 @@
+/**
+ * Created by PhpStorm.
+ * User: Philipnormal
+ * Date: 08.11.18
+ * Time: 17:14
+ * License: MIT
+ */
+
 .multidimensional-card{
     position: relative;
     display: -ms-flexbox;
@@ -27,6 +35,6 @@
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     background-color: white;
-    transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
+    transform: none;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
 }
