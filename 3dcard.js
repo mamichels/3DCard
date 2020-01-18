@@ -6,25 +6,23 @@
  * License: MIT
  */
 
-
-var mousePosX;
-var mousePosY;
-var elem = document.getElementById('multidimensional-card');
-var elembody = document.getElementById('multidimensional-card-body');
-var originX = elem.offsetWidth;
-var originY = elem.offsetHeight;
-var rotateX;
-var rotateY;
-var translateX;
-var translateY;
+let mousePosX;
+let mousePosY;
+let element = document.getElementById('multidimensional-card');
+let elembody = document.getElementById('multidimensional-card-body');
+let originX = element.offsetWidth;
+let originY = element.offsetHeight;
+let rotateX;
+let rotateY;
+let translateX;
+let translateY;
 
 //elem.addEventListener('mouseenter', mIn, false);
-elem.addEventListener('mousemove', onMousemove, false);
-elem.addEventListener('mouseout', mOut, false);
-
+element.addEventListener('mousemove', onMousemove, false);
+element.addEventListener('mouseout', mOut, false);
 
 function onMousemove(e){
-    var m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0, obj = this;
+    let m_posx = 0, m_posy = 0, e_posx = 0, e_posy = 0, obj = this;
     //get mouse position on document crossbrowser
     if (!e){e = window.event;}
     if (e.pageX || e.pageY){
@@ -53,7 +51,7 @@ function onMousemove(e){
         rotateY = -1 * rotateY;
     }
 
-    elem.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1.03)";
+    element.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) rotateZ(0deg) scale(1.03)";
 
     if(elembody){
         translateX = -(((originX / 2) - mousePosX) * 0.01);
@@ -73,6 +71,6 @@ function mOut() {
     if(elembody) {
         elembody.style.transform = "none";
     }
-    elem.style.transform = "rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1)";
-    elem.style.animation = "";
+    element.style.transform = "rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1)";
+    element.style.animation = "";
 }
