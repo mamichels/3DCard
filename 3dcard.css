@@ -20,7 +20,6 @@
     background-color: #f3f4f1;
     transform: rotateY(1deg) rotateX(0deg) rotateZ(0deg) scale(1);
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-    height: 500px;
 }
 
 .multidimensional-card-body{
@@ -30,10 +29,14 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
-    margin: 10% 20% 0 0;
+    margin: 0 20% 0 0;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     background-color: white;
     transform: none;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.filler {
+    margin-bottom: 40px;
 }
